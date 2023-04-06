@@ -54,6 +54,6 @@ jobs:
 
       - name: Build image and push to Docker Hub and GitHub Container Registry
         run: |
-          docker build --build-arg tutor_release=15.3.3 -t abstract2tech/tutor-ci:15.3.3
+          docker build --build-arg tutor_release=15.3.3 -t abstract2tech/tutor-ci:15.3.3 .
           docker push abstract2tech/tutor-ci:15.3.3 
  
