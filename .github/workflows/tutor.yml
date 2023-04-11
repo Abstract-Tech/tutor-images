@@ -1,0 +1,34 @@
+name: Build and Push docker & tutor installed images
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-images:
+    strategy:
+      matrix:
+        version: [14.2.3, 15.3.3]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to Docker Registry
+        uses: docker/login-action@v2
+        with:
+          registry: docker.io
+          username: abstract2tech
+          password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
+
+      - name: Build image and push to Docker Hub and GitHub Container Registry
+        run: |
+          docker build --build-arg tutor_release=${{ matrix.version }} -t abstract2tech/tutor-ci:${{ matrix.version }} .
+          docker push abstract2tech/tutor-ci:${{ matrix.version }}
