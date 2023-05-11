@@ -4,6 +4,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 COPY --from=docker:23 /usr/local/bin/* /usr/bin/
 COPY --from=docker:23 /usr/local/libexec/docker/cli-plugins/* /usr/libexec/docker/cli-plugins/
+COPY --from=mikefarah/yq:4.33.3 /usr/bin/yq /usr/bin/yq
 
 RUN apt-get update && apt-get install -qq --no-install-recommends python3 python3-pip libyaml-dev
 
