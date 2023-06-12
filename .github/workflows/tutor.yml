@@ -10,7 +10,7 @@ jobs:
   build-images:
     strategy:
       matrix:
-        version: ["14.2.3", "15.3.3", "15.3.4", "15.3.5"]
+        version: ["14.2.3", "15.3.3", "15.3.4", "15.3.5", "15.3.6"]
     runs-on: ubuntu-latest
 
     steps:
