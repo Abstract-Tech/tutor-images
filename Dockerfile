@@ -1,10 +1,19 @@
+FROM alpine:3.19 as age
+
+RUN apk add curl
+
+RUN curl -L https://github.com/FiloSottile/age/releases/download/v1.1.1/age-v1.1.1-linux-amd64.tar.gz | tar xzf - -C /tmp
+
 FROM python:3.11-bookworm
 
 ARG DEBIAN_FRONTEND=noninteractive
 
 COPY --from=docker:23 /usr/local/bin/* /usr/bin/
 COPY --from=docker:23 /usr/local/libexec/docker/cli-plugins/* /usr/libexec/docker/cli-plugins/
-COPY --from=mikefarah/yq:4.33.3 /usr/bin/yq /usr/bin/yq
+COPY --from=mikefarah/yq:4.40.5 /usr/bin/yq /usr/bin/yq
+COPY --from=bitnami/kubectl:1.28.6 /opt/bitnami/kubectl/bin/kubectl /usr/local/bin
+COPY --from=age /tmp/age/age /usr/bin/yq
+ADD https://github.com/getsops/sops/releases/download/v3.8.1/sops-v3.8.1.linux.amd64 /usr/local/bin/sops
 
 RUN apt-get update && apt-get install -qq --no-install-recommends python3 python3-pip libyaml-dev
 
