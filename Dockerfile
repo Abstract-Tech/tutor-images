@@ -12,7 +12,7 @@ COPY --from=docker:23 /usr/local/bin/* /usr/bin/
 COPY --from=docker:23 /usr/local/libexec/docker/cli-plugins/* /usr/libexec/docker/cli-plugins/
 COPY --from=mikefarah/yq:4.40.5 /usr/bin/yq /usr/bin/yq
 COPY --from=bitnami/kubectl:1.28.6 /opt/bitnami/kubectl/bin/kubectl /usr/local/bin
-COPY --from=age /tmp/age/age /usr/bin/yq
+COPY --from=age /tmp/age/age /usr/bin/age
 ADD https://github.com/getsops/sops/releases/download/v3.8.1/sops-v3.8.1.linux.amd64 /usr/local/bin/sops
 
 RUN apt-get update && apt-get install -qq --no-install-recommends python3 python3-pip libyaml-dev
