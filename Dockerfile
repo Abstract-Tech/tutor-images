@@ -19,7 +19,7 @@ COPY --from=docker:23 /usr/local/bin/* /usr/bin/
 COPY --from=docker:23 /usr/local/libexec/docker/cli-plugins/* /usr/libexec/docker/cli-plugins/
 COPY --from=mikefarah/yq:4.40.5 /usr/bin/yq /usr/bin/yq
 COPY --from=bitnami/kubectl:1.28.6 /opt/bitnami/kubectl/bin/kubectl /usr/local/bin
-COPY --from=bitnami/minio-client:2024.05.9 /opt/bitnami/minio-client/bin/mc /usr/local/bin
+COPY --from=bitnami/minio-client:2024.5.9 /opt/bitnami/minio-client/bin/mc /usr/local/bin
 COPY --from=age /tmp/age/age /usr/bin/age
 COPY --from=sops /tmp/sops /usr/local/bin/sops
 RUN chmod +x /usr/local/bin/sops
