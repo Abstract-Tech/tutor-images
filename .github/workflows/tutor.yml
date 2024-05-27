@@ -40,6 +40,7 @@ jobs:
           - "17.0.2"
           - "17.0.3"
           - "17.0.4"
+          - "17.0.5"
     runs-on: ubuntu-latest
 
     steps:
