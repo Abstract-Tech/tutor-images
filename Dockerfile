@@ -1,14 +1,14 @@
-FROM alpine:3.19 as age
+FROM alpine:3.21 as age
 
 RUN apk add curl
 
-RUN curl -L https://github.com/FiloSottile/age/releases/download/v1.1.1/age-v1.1.1-linux-amd64.tar.gz | tar xzf - -C /tmp
+RUN curl -L https://github.com/FiloSottile/age/releases/download/v1.2.1/age-v1.2.1-linux-amd64.tar.gz | tar xzf - -C /tmp
 
-FROM alpine:3.19 as sops
+FROM alpine:3.21 as sops
 
 RUN apk add curl
 
-RUN curl -L https://github.com/getsops/sops/releases/download/v3.8.1/sops-v3.8.1.linux.amd64 > /tmp/sops
+RUN curl -L https://github.com/getsops/sops/releases/download/v3.9.3/sops-v3.9.3.linux.amd64 > /tmp/sops
 RUN chmod +x /tmp/sops
 
 FROM python:3.11-bookworm
@@ -40,4 +40,4 @@ RUN pip install "tutor<=${TUTOR_RELEASE}" \
                 "tutor-webui<=${TUTOR_RELEASE}" \
                 "tutor-xqueue<=${TUTOR_RELEASE}"
 
-MAINTAINER Illia Shestakov <i.shestakov@abstract-technology.de>
+LABEL org.opencontainers.image.authors="Illia Shestakov <i.shestakov@abstract-technology.de>"
