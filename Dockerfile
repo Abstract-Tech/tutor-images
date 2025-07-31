@@ -32,7 +32,7 @@ ENV TUTOR_RELEASE=20.0.0
 RUN pip install "tutor==20.0.0" \
                 "tutor-android==20.0.0" \
                 "tutor-discovery==20.0.0" \
-                "tutor-ecommerce==20.0.0" \
+                "tutor-ecommerce==19.0.0" \
                 "tutor-forum==20.0.0" \
                 "tutor-mfe==20.0.0" \
                 "tutor-minio==20.0.0" \
