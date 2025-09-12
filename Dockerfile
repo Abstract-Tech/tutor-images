@@ -39,5 +39,11 @@ RUN pip install "tutor==${TUTOR_RELEASE}" \
                 "tutor-webui==${TUTOR_RELEASE}" \
                 "tutor-xqueue==${TUTOR_RELEASE}"
 
+# installing AWS cli https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+RUN curl -sSL "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip" \
+    && unzip -q /tmp/awscliv2.zip -d /tmp/ \
+    && /tmp/aws/install \
+    && rm -rf /tmp/awscliv2.zip /tmp/aws
+
 LABEL org.opencontainers.image.authors="Maksym Bilan <m.bilan@abstract-technology.de>"
 LABEL org.opencontainers.image.authors="Emad Rad <e.ehsanrad@abstract-technology.de>"
