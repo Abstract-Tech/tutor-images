@@ -39,4 +39,5 @@ RUN pip install "tutor==20.0.0" \
                 "tutor-webui==20.0.0" \
                 "tutor-xqueue==20.0.0"
 
-LABEL org.opencontainers.image.authors="Illia Shestakov <i.shestakov@abstract-technology.de>"
+LABEL org.opencontainers.image.authors="Maksym Bilan <m.bilan@abstract-technology.de>"
+LABEL org.opencontainers.image.authors="Emad Rad <e.ehsanrad@abstract-technology.de>"
