@@ -27,17 +27,17 @@ RUN chmod +x /usr/local/bin/sops
 RUN apt-get update && apt-get install -qq --no-install-recommends python3 python3-pip libyaml-dev
 
 ARG tutor_release
-ENV TUTOR_RELEASE=20.0.0
+ENV TUTOR_RELEASE=$tutor_release
 
-RUN pip install "tutor==20.0.0" \
-                "tutor-android==20.0.0" \
-                "tutor-discovery==20.0.0" \
-                "tutor-forum==20.0.0" \
-                "tutor-mfe==20.0.0" \
-                "tutor-minio==20.0.0" \
-                "tutor-notes==20.0.0" \
-                "tutor-webui==20.0.0" \
-                "tutor-xqueue==20.0.0"
+RUN pip install "tutor==${TUTOR_RELEASE}" \
+                "tutor-android==${TUTOR_RELEASE}" \
+                "tutor-discovery==${TUTOR_RELEASE}" \
+                "tutor-forum==${TUTOR_RELEASE}" \
+                "tutor-mfe==${TUTOR_RELEASE}" \
+                "tutor-minio==${TUTOR_RELEASE}" \
+                "tutor-notes==${TUTOR_RELEASE}" \
+                "tutor-webui==${TUTOR_RELEASE}" \
+                "tutor-xqueue==${TUTOR_RELEASE}"
 
 LABEL org.opencontainers.image.authors="Maksym Bilan <m.bilan@abstract-technology.de>"
 LABEL org.opencontainers.image.authors="Emad Rad <e.ehsanrad@abstract-technology.de>"
