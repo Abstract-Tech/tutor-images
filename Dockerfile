@@ -11,7 +11,7 @@ RUN apk add curl
 RUN curl -L https://github.com/getsops/sops/releases/download/v3.9.3/sops-v3.9.3.linux.amd64 > /tmp/sops
 RUN chmod +x /tmp/sops
 
-FROM python:3.11-bookworm
+FROM python:3.11.13-bookworm
 
 ARG DEBIAN_FRONTEND=noninteractive
 
