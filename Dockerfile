@@ -1,10 +1,10 @@
-FROM alpine:3.21 as age
+FROM alpine:3.21 AS age
 
 RUN apk add curl
 
 RUN curl -L https://github.com/FiloSottile/age/releases/download/v1.2.1/age-v1.2.1-linux-amd64.tar.gz | tar xzf - -C /tmp
 
-FROM alpine:3.21 as sops
+FROM alpine:3.21 AS sops
 
 RUN apk add curl
 
