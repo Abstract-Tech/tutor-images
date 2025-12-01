@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Tutor version to build'
+        description: 'Docker image version (e.g., alpha, beta, latest, 1.0.0, etc.)'
         required: true
         type: string
-        default: '20.0.0'
+        default: 'latest'
 
 jobs:
   build-image:
@@ -30,5 +30,5 @@ jobs:
 
       - name: Build image and push to Docker Hub
         run: |
-          docker build --build-arg tutor_release=${{ github.event.inputs.version }} -t abstract2tech/tutor-ci:${{ github.event.inputs.version }} .
+          docker build -t abstract2tech/tutor-ci:${{ github.event.inputs.version }} .
           docker push abstract2tech/tutor-ci:${{ github.event.inputs.version }}

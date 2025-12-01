@@ -10,7 +10,8 @@ Images are published to: `abstract2tech/tutor-ci`
 
 You can build any Tutor version by specifying it when triggering the workflow. Common versions include:
 Tested version:
-- "14.2.3"   
+
+- "14.2.3"
 - "14.2.4"
 - "14.2.5"
 - "15.3.3"
@@ -57,9 +58,36 @@ Not tested:
 
 ## How to Use
 
+## Replacing Bitnami images / binaries
+
+The Dockerfile previously used commented Bitnami multi-stage COPYs for two helper tools:
+
+- kubectl (bitnami/kubectl:1.28.6)
+- mc — MinIO client (bitnami/minio-client:2024.5.9)
+
+Rather than copying these from Bitnami images, the build now downloads the official upstream
+binaries for each tool and installs them into `/usr/local/bin`:
+
+- kubectl — downloaded from the official Kubernetes release binary (pinned to `1.28.6` in the Dockerfile)
+- mc — downloaded from MinIO's release binary
+
+Why this change?
+
+- Avoid reliance on third-party vendor images for small helper binaries.
+- Pinning a known release binary reduces surprise changes caused by upstream image base changes.
+- Reduces the number of build stages/sizes when those images aren't otherwise needed.
+
+If you'd rather copy from alternate images (for example an official docker image that already contains the binaries):
+
+1. Identify a replacement image and the correct path to the binary inside it (e.g. `/usr/bin/mc` or `/kubectl`).
+2. Replace the relevant `curl`-download lines in the `Dockerfile` with an equivalent `COPY --from=<image>:<tag> <path-to-binary> /usr/local/bin/<bin>`.
+
+Note: pin versions explicitly when using downloads or image tags to keep builds reproducible.
+
 ## Prerequisites
 
 For maintainers who want to trigger builds:
+
 - GitHub account with access to this repository
 - Docker Hub secret `DOCKER_REGISTRY_PASSWORD` must be configured in repository settings
 
@@ -72,5 +100,6 @@ For maintainers who want to trigger builds:
 5. Click "Run workflow"
 
 The workflow will:
+
 - Build a Docker image with the specified Tutor version
 - Push it to Docker Hub as `abstract2tech/tutor-ci:<version>`
